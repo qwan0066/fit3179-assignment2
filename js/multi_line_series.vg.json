@@ -5,7 +5,7 @@
     "padding": {"left": 10},
     "data": {"url": "https://raw.githubusercontent.com/qwan0066/fit3179-assignment2/main/data/day_wise.csv"},
     "transform": [
-        {"fold": ["Active", "Recovered", "Deaths"]}
+        {"fold": ["Deaths / 100 Cases", "Recovered / 100 Cases", "Deaths / 100 Recovered"]}
       ],
     "mark": {
       "type": "line"
