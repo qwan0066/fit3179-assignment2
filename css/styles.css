@@ -52,7 +52,7 @@ body {
     color: white;
 }
 #vis_frame {
-    background-color: #ddeefa;
+    background-color: #ecd4b7;
     padding: 25px;
 }
 #vis_frame p {
@@ -64,7 +64,7 @@ body {
     width: 100%;
 }
 #end_credit {
-    background: url("../media/webpage_banner.jpg") #20445f;
+    background:#20445f;
     background-position: center;
     color: white;
     padding-left: 20px;
