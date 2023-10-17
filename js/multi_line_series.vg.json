@@ -31,7 +31,7 @@
     "y": {
       "field": "value",
       "type": "quantitative",
-      "title": "Percentage (%)"
+      "title": "Number of cases"
     },
     "color": {
       "field": "key",
