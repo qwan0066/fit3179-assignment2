@@ -1,148 +1,166 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Covid-19 Analysis</title>
-    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"> 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="styles.css" media="all">
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <title>COVID-19 Analysis</title>
+
+    <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-    <title>Global Covid-19 Analysis</title>
-    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="styles.css" media="all">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">    
+
+    <!-- Import css style sheet -->
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css"
+        integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/grids-responsive-min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Magra:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <!-- CSS file -->
+    <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+
 </head>
+
 <body>
+    <div class="page">
+        <!-- pure grid group -->
+        <div class="pure-g" id="banner">
+            <div class="pure-u-1-1">
+                <h1>COVID-19 Analysis Around the World</h1>
+            </div>
+        </div>
+        <!-- end pure grid group -->
 
-
-        <div class="col-9 scroll-snap-parent">
-            <section class="scroll-snap-section">
-
-
-                <div class="content">
-
-                    <div class="header row mb-3 pb-3">
-                        <div class="col">
-                            <p class="h1 text-center pt-4 title">Covid-19 Case Analysis</p>
-                            <p class="text-center h2">Around the World</p>
-                        </div>
-                    </div>
-
-                    <div class="top-cards">
-                        <div class="section-header">
-                            <div class="vis-title">Analysis Period: January 2022 to July 2022</div>
-                            <p>This visualization reports on the <strong>important</strong> findings of Global Covid-19 cases Data using data from January to Juy <strong>2022</strong>. Below is a summary of statistical figures in 2022, in which we will perform in depth analysis on.</p>
-                        </div>
-                    </div>
+        <!-- pure grid group -->
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+                <div id="vis_frame">
+                    <h2>COVID-19 <span class="red_text">Active Cases</span> Around the World</h2>
+                    <p>The <span class="red_text">COVID-19</span> pandemic has led to a dramatic loss of human life
+                        worldwide and presents an
+                        unprecedented challenge to public health, food systems and the world of work.
+                        The economic and social disruption caused by the pandemic is devastating: tens of millions
+                        of people are at risk of falling into extreme poverty, while the number of undernourished
+                        people, currently estimated at nearly <strong>690 million</strong>, could increase by up to
+                        <strong>132 million</strong> by
+                        the end of the year.
+                    </p>
+                    <p>The map display a good overview on which countries are impacted the most by covid-19. It can
+                        be seen
+                        based on the number of <span class="red_text"> Active cases</span>. Each country is
+                        coloured based on the <strong>intensity of the colour</strong>.</p>
+                    <div id="choropleth_map"></div>
                 </div>
-            </section>
+            </div>
+        </div>
 
-            <div class="content">
-                <div class="section-header">
-                    <p class="h5 text-center">Number of <span id="continent-name" class="font-weight-bold">Active Covid-19 Cases</span> in the Whole World</p>
-                    <br>
-                    <div id="vis1" class='my-1 mx-auto'></div>
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+                <div id="vis_frame">
+                    <h2>Correlation Between Confirmed Cases and Deaths </h2>
+                    <p>There seems to be a <strong>strong relationship</strong> between the number of <span
+                            class="red_text">Confirmed</span> cases and
+                        the number of <span class="red_text">deaths</span>. The larger the population in the country,
+                        the more COVID-19 cases
+                        that is tested. This will contribute to the number of deaths.</p>
+                    <div id="small_text">
+                        <p>Select the <strong>Continent</strong> on the legend to filter the chart</p>
+                    </div>
+                    <div id="scatter_plot"></div>
                 </div>
-
-                <div class="section-header">
-                    <p class="h5 text-center">Number of Covid Cases by <strong>Continent</strong>. </p>
-                    <br>
+            </div>
+        </div>
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+                <div id="vis_frame">
+                    <h2>Rate of Recovered cases and Deaths of COVID-19</h2>
+                    <p>The line graph shows the <span class="red_text">recovered</span> and <span
+                            class="red_text">deaths</span> per 100 cases. Based on the visualisation,
+                        the number of recovered cases increase as the time goes as this is a possibility of researchers
+                        developing better vaccination and understanding on the virus. However, the number of deaths did
+                        not increase as much as the number of recovered case.</p>
+                    <div id="small_text">
+                        <p>Hover the line on the chart to see the value and date</p>
+                    </div>
+                    <div id="multi_line_series"></div>
+                </div>
+            </div>
+        </div>
+        <div class="pure-g">
+            <div class="pure-u-1-1">
+                <div id="vis_frame">
+                    <h2>Percentage of Cases in each Continent</h2>
+                    <p>Based on the donut charts shown below. The continent, <span class="red_text">Europe</span> has
+                        the <strong>highest</strong>
+                        percentage among the others. This is most likely due to the population of the country
+                        that caused people to catch the virus. While, the continent with the least cases is South
+                        America,
+                        but this must not be taken lightly as the data collected only consists 14 countries.</p>
+                    <div id="small_text">
+                        <p>Hover the chart to see the number of <strong>cases</strong>.</p>
+                    </div>
                     <div class="mx-auto row">
-                        <div id="vis4" class="col-4 selectable"></div>
-                        <div id="vis5" class="col-4 selectable"></div>
-                        <div id="vis6" class="col-4 selectable"></div>
+                        <div id="donut_Active" class="col-4 selectable"></div>
+                        <div id="donut_Deaths" class="col-4 selectable"></div>
+                        <div id="donut_Recovered" class="col-4 selectable"></div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    </div>
+    </div>
+    <!-- end pure grid group -->
 
-            <section>
-                <div id="network" class="my-1 mx-auto" style="display: none;"></div>
-            </section>
+    <!-- pure grid group -->
+    <div class="pure-g">
+        <div class="pure-u-1-1" id="end_credit">
+            <p>This visualisation is created by <a href="https://github.com/qwan0066/fit3179-assignment2"
+                    target="_blank">Wang
+                    Qian</a></href>, 30884691.<br>Data sources: <a
+                    href="https://www.kaggle.com/datasets/imdevskp/corona-virus-report?select=covid_19_clean_complete.csv"
+                    target="_blank">Kaggle</a></href>.</p>
+        </div>
+    </div>
+    <!-- end pure grid group -->
+    </div> <!-- end page -->
 
-            <div class="content">
-                <div class="daily-cases-section">
-                    <div class="section-header">
-                        <div class="vis-title">Daily Covid Cases Analysis from January to July 2022</div>
-                        <div>
-                            <p>
-                                Here we analyse the <b class="bolds">gradient of the cases increasing as time goes</b>.
-                            </p>
-                            <br>
-                        </div>
-                        <div class="timeline-area">
-                            <div class="vis-wrapper" id="vis3"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="content">
-                <div class="deaths-section">
-                    <div class="section-header">
-                        <div class="vis-title">Confirmed cases vs Death cases aroud the Whole world</div>
-                        <div class="vax-info-section">
-                            <div class="vis-wrapper" id="vis2"></div>
-                        </div>
-                    </div>
-            </div>
-
-
-
-    <script src="resources/scrollsnap/vendor/philipwalton/polyfill.js"></script>
-    <script src="resources/scrollsnap/src/scrollsnap-polyfill.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script type="text/javascript">
+        var vis1 = "js/choropleth_map.vg.json";
+        var vis2 = "js/scatter_plot.vg.json";
+        var vis3 = "js/multi_line_series.vg.json";
+        var vis4 = "js/donut_Active.vg.json"
+        var vis5 = "js/donut_Deaths.vg.json"
+        var vis6 = "js/donut_Recovered.vg.json"
 
+        vegaEmbed('#choropleth_map', vis1, { "actions": false }).then(function (result) {
+            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
 
-    
-      var vis1 = "js/choropleth_map.vg.json";
-      var vis2 = "js/scatter_plot.vg.json"
-      var vis3= "js/multi_line_series.vg.json";
-      var vis4 = "js/radial_plot_Active.vg.json";
-      var vis5 = "js/radial_plot_Deaths.vg.json";
-      var vis6 = "js/radial_plot_Recovered.vg.json";
+        vegaEmbed('#scatter_plot', vis2, { "actions": false }).then(function (result) {
+            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
 
+        vegaEmbed('#multi_line_series', vis3, { "actions": false }).then(function (result) {
+            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
 
-      vegaEmbed('#vis1', vis1, {"actions": false}).then(function(result){
-        map_view = result.view;
-      }).catch(console.error);
-      
-      vegaEmbed('#vis2', vis2, {"actions": false}).then(function(result) {
-        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-      }).catch(console.error);
+        vegaEmbed('#donut_Active', vis4, { "actions": false }).then(function (result) {
+            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
 
-      vegaEmbed('#vis3', vis3, {"actions": false}).then(function(result) {
-        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-      }).catch(console.error);
+        vegaEmbed('#donut_Deaths', vis5, { "actions": false }).then(function (result) {
+            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
 
-      vegaEmbed('#vis4', vis4, {"actions": false}).then(function(result) {
-        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-      }).catch(console.error);
-
-      vegaEmbed('#vis5', vis5, {"actions": false}).then(function(result) {
-        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-      }).catch(console.error);
-
-      vegaEmbed('#vis6', vis6, {"actions": false}).then(function(result) {
-        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-      }).catch(console.error);
-</script>
+        vegaEmbed('#donut_Recovered', vis6, { "actions": false }).then(function (result) {
+            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+        }).catch(console.error);
+    </script>
 </body>
+
 </html>

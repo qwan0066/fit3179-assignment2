@@ -1,39 +1,88 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v3.0.json",
-  "width": 300,
-  "height": 300,
-  "autosize": "pad",
-  "config": {"view": {"stroke": "transparent"}},
+  "width": 250,
+  "height": 250,
+  "padding":{"top": 10},
+  "background": null,
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    }
+  },
   "signals": [
-    {"name": "startAngle", "value": 0},
-    {"name": "endAngle", "value": 6.29},
-    {"name": "padAngle", "value": 0},
-    {"name": "sort", "value": true},
-    {"name": "strokeWidth", "value": 2},
+    {
+      "name": "startAngle",
+      "value": 0
+    },
+    {
+      "name": "endAngle",
+      "value": 6.29
+    },
+    {
+      "name": "padAngle",
+      "value": 0
+    },
+    {
+      "name": "sort",
+      "value": true
+    },
+    {
+      "name": "strokeWidth",
+      "value": 2
+    },
     {
       "name": "selected",
       "value": "",
-      "on": [{"events": "mouseover", "update": "datum"}]
+      "on": [
+        {
+          "events": "mouseover",
+          "update": "datum"
+        }
+      ]
     }
   ],
   "data": [
     {
       "name": "table",
       "values": [
-        {"Continent": "Africa", "Deaths": 147946},
-        {"Continent": "Asia", "Deaths": 29527},
-        {"Continent": "Europe", "Deaths": 338038},
-        {"Continent": "North America", "Deaths": 106460},
-        {"Continent": "Australia/Oceania", "Deaths": 25378},
-        {"Continent": "South America", "Deaths": 5604}
+        {
+          "Continent": "Africa",
+          "Deaths": 147946
+        },
+        {
+          "Continent": "Asia",
+          "Deaths": 29527
+        },
+        {
+          "Continent": "Australia/Oceania",
+          "Deaths": 25378
+        },
+        {
+          "Continent": "Europe",
+          "Deaths": 338038
+        },
+        {
+          "Continent": "North America",
+          "Deaths": 106460
+        },
+        {
+          "Continent": "South America",
+          "Deaths": 5604
+        }
       ],
       "transform": [
         {
           "type": "pie",
           "field": "Deaths",
-          "startAngle": {"signal": "startAngle"},
-          "endAngle": {"signal": "endAngle"},
-          "sort": {"signal": "sort"}
+          "startAngle": {
+            "signal": "startAngle"
+          },
+          "endAngle": {
+            "signal": "endAngle"
+          },
+          "sort": {
+            "signal": "sort"
+          }
         }
       ]
     },
@@ -43,49 +92,59 @@
       "transform": [
         {
           "type": "aggregate",
-          "fields": ["Deaths"],
-          "ops": ["sum"],
-          "as": ["sum"]
+          "fields": [
+            "Deaths"
+          ],
+          "ops": [
+            "sum"
+          ],
+          "as": [
+            "sum"
+          ]
         }
       ]
     }
   ],
-  "legends": [
-    {
-      "fill": "color",
-      "title": "Legends",
-      "orient": "none",
-      "padding": {"value": 10},
-      "encode": {
-        "symbols": {"enter": {"fillOpacity": {"value": 1}}},
-        "legend": {
-          "update": {
-            "x": {
-              "signal": "(width / 2) + if(selected && selected.Continent == datum.Continent, if(width >= height, height, width) / 2 * 1.1 * 0.8, if(width >= height, height, width) / 2 * 0.8)",
-              "offset": 20
-            },
-            "y": {"signal": "(height / 2)", "offset": -50}
-          }
-        }
-      }
-    }
-  ],
   "scales": [
-    {"name": "color", "type": "ordinal", "range": {"scheme": "category20"}}
+    {
+      "name": "color",
+      "type": "ordinal",
+      "range": [
+        "#e41a1c",
+        "#984ea3",
+        "#ff7f00",
+        "#a6cee3",
+        "#377eb8",
+        "#a65628"
+      ]
+    }
   ],
   "marks": [
     {
       "type": "arc",
-      "from": {"data": "table"},
+      "from": {
+        "data": "table"
+      },
       "encode": {
         "enter": {
-          "fill": {"scale": "color", "field": "Continent"},
-          "x": {"signal": "width / 2"},
-          "y": {"signal": "height / 2"}
+          "fill": {
+            "scale": "color",
+            "field": "Continent"
+          },
+          "x": {
+            "signal": "width / 2"
+          },
+          "y": {
+            "signal": "height / 2"
+          }
         },
         "update": {
-          "startAngle": {"field": "startAngle"},
-          "endAngle": {"field": "endAngle"},
+          "startAngle": {
+            "field": "startAngle"
+          },
+          "endAngle": {
+            "field": "endAngle"
+          },
           "padAngle": {
             "signal": "if(selected && selected.Continent == datum.Continent, 0.015, 0.015)"
           },
@@ -98,8 +157,12 @@
           "opacity": {
             "signal": "if(selected && selected.Continent !== datum.Continent, 1, 1)"
           },
-          "stroke": {"signal": "scale('color', datum.Continent)"},
-          "strokeWidth": {"signal": "strokeWidth"},
+          "stroke": {
+            "signal": "scale('color', datum.Continent)"
+          },
+          "strokeWidth": {
+            "signal": "strokeWidth"
+          },
           "fillOpacity": {
             "signal": "if(selected && selected.Continent == datum.Continent, 0.8, 0.8)"
           },
@@ -112,37 +175,74 @@
     {
       "type": "text",
       "encode": {
-        "enter": {"fill": {"value": "#525252"}, "text": {"value": ""}},
+        "enter": {
+          "fill": {
+            "value": "#525252"
+          },
+          "text": {
+            "value": ""
+          }
+        },
         "update": {
-          "opacity": {"value": 2},
-          "x": {"signal": "width / 2"},
-          "y": {"signal": "height / 2"},
-          "align": {"value": "center"},
-          "baseline": {"value": "middle"},
-          "fontSize": {"signal": "if(width >= height, height, width) * 0.05"},
-          "text": {"value": "Deaths"}
+          "opacity": {
+            "value": 2
+          },
+          "x": {
+            "signal": "width / 2"
+          },
+          "y": {
+            "signal": "height / 2"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "fontSize": {
+            "signal": "if(width >= height, height, width) * 0.05"
+          },
+          "text": {
+            "value": "Deaths"
+          }
         }
       }
     },
     {
       "name": "mark_recovered",
       "type": "text",
-      "from": {"data": "table"},
+      "from": {
+        "data": "table"
+      },
       "encode": {
         "enter": {
           "text": {
             "signal": "if(datum['endAngle'] - datum['startAngle'] < 0.3, '', format((datum['endAngle'] - datum['startAngle']) / (2 * PI), '.1%'))"
           },
-          "x": {"signal": "if(width >= height, height, width) / 2"},
-          "y": {"signal": "if(width >= height, height, width) / 2"},
+          "x": {
+            "signal": "if(width >= height, height, width) / 2"
+          },
+          "y": {
+            "signal": "if(width >= height, height, width) / 2"
+          },
           "radius": {
             "signal": "if(selected && selected.Continent == datum.Continent, if(width >= height, height, width) / 2 * 1.05 * 0.65, if(width >= height, height, width) / 2 * 0.65)"
           },
-          "theta": {"signal": "(datum['startAngle'] + datum['endAngle'])/2"},
-          "fill": {"value": "#FFFFFF"},
-          "fontSize": {"value": 12},
-          "align": {"value": "center"},
-          "baseline": {"value": "middle"}
+          "theta": {
+            "signal": "(datum['startAngle'] + datum['endAngle'])/2"
+          },
+          "fill": {
+            "value": "#000000"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "middle"
+          }
         }
       }
     }

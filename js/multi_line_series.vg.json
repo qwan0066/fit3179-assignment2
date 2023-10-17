@@ -1,20 +1,66 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "width": 900,
-    "height": 600,
-    "padding": {"left": 10},
-    "data": {"url": "https://raw.githubusercontent.com/qwan0066/fit3179-assignment2/main/data/day_wise.csv"},
-    "transform": [
-        {"fold": ["Deaths / 100 Cases", "Recovered / 100 Cases", "Deaths / 100 Recovered"]}
-      ],
-    "mark": {
-      "type": "line"
-    },
-    "encoding": {
-      "x": {"timeUnit": "monthdate","field": "Date", "type": "temporal"},
-      "y": {"field": "value", "type": "quantitative"},
-      "color": {"field": "key", "type": "nominal"}
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 850,
+  "height": 300,
+  "background": null,
+  "padding": {
+    "left": 10
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/qwan0066/fit3179-assignment2/main/data/day_wise.csv"
+  },
+  "transform": [
+    {
+      "fold": [
+        "Deaths / 100 Cases",
+        "Recovered / 100 Cases",
+        "Deaths / 100 Recovered"
+      ]
     }
-    
+  ],
+  "mark": {
+    "type": "line"
+  },
+  "encoding": {
+    "x": {
+      "timeUnit": "monthdate",
+      "field": "Date",
+      "type": "temporal",
+      "title": "Date"
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "Percentage (%)"
+    },
+    "color": {
+      "field": "key",
+      "type": "nominal",
+      "title": "Per 100 Cases",
+      "scale": {
+        "domain": [
+        "Deaths / 100 Cases",
+        "Recovered / 100 Cases",
+        "Deaths / 100 Recovered"
+        ]
+      }
+    },
+    "tooltip": [
+      {
+        "field": "Date",
+        "type": "temporal",
+        "title": "Date"
+      },
+      {
+        "field": "value",
+        "type": "quantitative",
+        "title": "Value"
+      },
+      {
+        "field": "key",
+        "type": "nominal",
+        "title": "Category"
+      }
+    ]
   }
-  
+}
